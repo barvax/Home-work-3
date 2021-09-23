@@ -32,10 +32,15 @@
 		 this.numOfWarnings = 0;
 
 		this.addGrade = function(grade){
+		if(this.active){
 		this.grades.push(grade)
-		if(this.grades.lenght-1<=59){
+		if(this.grades[this.grades.length-1]<=59){
 		sendSms(this)
+		
+		if(this.numOfWarnings>=3){this.active=false}
 		}
+		}		
+		
 		}		 
 		 
 		 }
@@ -57,16 +62,22 @@
             console.log("SMS to " + student.fullName + " (" + student.phoneNumber + ")", text);
         }
 
-        addGradesToStudents([40, 75, 80]);  // Maayan grade is 40, Elad grade is 75, Ben grade is 80
-        addGradesToStudents([50, 85, 90]);
-        addGradesToStudents([55, 90, 70]);
-        addGradesToStudents([50, 50]);  // Maayan is not longer a student...
-
+       // addGradesToStudents([40, 75, 80]);  // Maayan grade is 40, Elad grade is 75, Ben grade is 80
+       // addGradesToStudents([50, 85, 90]);
+       // addGradesToStudents([55, 90, 70]);
+      //  addGradesToStudents([50, 50]);  // Maayan is not longer a student...
+			addGradesToStudents(40);
+			addGradesToStudents(40);
+			addGradesToStudents(40);
+			addGradesToStudents(40);
         /**
          * add grade for each student that is active.
          */
         function addGradesToStudents(grades) {
-
+		for(i=0;i<students.length;i++){
+		students[i].addGrade(grades)
+		}
+		console.log(students)
         }
 
         /**
